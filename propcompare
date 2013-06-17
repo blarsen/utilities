@@ -1,0 +1,35 @@
+#!/usr/bin/python
+
+# Compare two property files and report if there are any keys missing from one of them
+# Useful if you maintain property files for different environments (e.g. languages)
+# and you want to make sure that they share the same set of keys.
+
+# TODO Make the parsing cleverer
+
+import sys
+
+def loadKeys(filename):
+    keys = []
+    with open(filename) as f:
+    	 props = f.readlines()
+    for line in props:
+        if line.startswith("#"):
+            continue
+        if "=" in line:
+            elements = line.split("=")
+            keys.append(elements[0].strip())
+    return keys
+
+def findMissing(keys1, keys2, filename1, filename2):
+    for key in keys1:
+        if not key in keys2:
+            print key, "is missing from", filename2
+
+filename1 = sys.argv[1]
+filename2 = sys.argv[2]
+
+keys1 = loadKeys(filename1)
+keys2 = loadKeys(filename2)
+
+findMissing(keys1, keys2, filename2, filename2)
+findMissing(keys2, keys1, filename1, filename1)
