@@ -6,13 +6,14 @@
 
 # TODO Make the parsing cleverer
 
-import sys
+import sys, re
 
 def loadKeys(filename):
     keys = []
     with open(filename) as f:
     	 props = f.readlines()
     for line in props:
+        line =  re.sub("#.*", "", line).strip()
         if line.startswith("#"):
             continue
         if "=" in line:
