@@ -21,10 +21,10 @@ def loadKeys(filename):
             keys.append(elements[0].strip())
     return keys
 
-def findMissing(keys1, keys2, filename1, filename2):
+def findMissing(keys1, keys2, filename):
     for key in keys1:
         if not key in keys2:
-            print key, "is missing from", filename2
+            print key, "is missing from", filename
 
 filename1 = sys.argv[1]
 filename2 = sys.argv[2]
@@ -32,5 +32,5 @@ filename2 = sys.argv[2]
 keys1 = loadKeys(filename1)
 keys2 = loadKeys(filename2)
 
-findMissing(keys1, keys2, filename2, filename2)
-findMissing(keys2, keys1, filename1, filename1)
+findMissing(keys1, keys2, filename2)
+findMissing(keys2, keys1, filename1)
